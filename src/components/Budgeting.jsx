@@ -60,7 +60,7 @@ function Budgeting({ currentUser, handleLogout, navigateToPage }) {
     labels: expenses.map(item => item.category),
     datasets: [
       {
-        label: 'Chi tiêu theo danh mục',
+        label: 'Expenses by Category',
         data: expenses.map(item => item.amount),
         backgroundColor: [
           'rgba(255, 99, 132, 0.8)',
@@ -161,7 +161,13 @@ function Budgeting({ currentUser, handleLogout, navigateToPage }) {
             {/* Thẻ bên phải: Biểu đồ tròn */}
             <div className={styles.pieChartCard}>
               <div className={styles.chartWrapper}>
-                <Pie data={chartData} />
+                <Pie 
+                   data={chartData} 
+                  options={{
+                     responsive: true,
+                      maintainAspectRatio: true,
+               }} 
+  />
               </div>
             </div>
           </div>

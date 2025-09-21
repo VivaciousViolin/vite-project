@@ -6,6 +6,7 @@ import Toast from './components/Toast.jsx'
 import LoadingSpinner from './components/LoadingSpinner.jsx'
 import CashFlow from './components/CashFlow.jsx' //BINGCHILLING
 import Goals from './components/Goals.jsx'
+import Budgeting from './components/Budgeting.jsx'
 import { checkAuthState, getCurrentUser, initializeDemoData } from './utils/auth.jsx'
 
 function App() {
@@ -50,6 +51,11 @@ useEffect(() => {
     console.log('cashflow, get your money up not your funny up')
     setCurrentPage('cashflow')
   }
+
+  const showBudgetingPage = () => {
+    console.log('cashflow')
+    setCurrentPage('budgeting')
+  }
 
   const showHomePage = () => {
     console.log('🏡 Showing home page')
@@ -119,8 +125,10 @@ useEffect(() => {
     showLoading,
     handleLogout,
     navigateToPage,
+    showBudgetingPage,
     currentUser,
     showCashFlowPage, //BINGCHILLING
+    
     authTab,
     setAuthTab,
     // Add these new navigation functions
@@ -133,6 +141,7 @@ useEffect(() => {
       {currentPage === 'auth' && <AuthPage {...appProps} />}
       {currentPage === 'home' && <HomePage {...appProps} />}
       {currentPage === 'goals' && <Goals {...appProps} />}
+      {currentPage === 'budgeting' && <Budgeting {...appProps} />}
       
       <Toast toasts={toasts} removeToast={removeToast} />
       <LoadingSpinner isLoading={isLoading} />

@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Cần thêm showGoalsPage vào đây để HomePage có thể sử dụng hàm này
-function HomePage({ currentUser, handleLogout, navigateToPage, showCashFlowPage, showGoalsPage }) {
+function HomePage({ currentUser, handleLogout, navigateToPage, showCashFlowPage, showGoalsPage, showBudgetingPage }) {
   const username = currentUser ? currentUser.username : 'User'
   
   return (
@@ -53,8 +53,8 @@ function HomePage({ currentUser, handleLogout, navigateToPage, showCashFlowPage,
 
             <div 
               className="dashboard-card"
-              onClick={() => navigateToPage('budgeting')}
-            >
+              //onClick={() => navigateToPage('budgeting')}
+                onClick={showBudgetingPage}           >
               <div className="card-icon">
                 <i className="fas fa-pie-chart"></i>
               </div>
