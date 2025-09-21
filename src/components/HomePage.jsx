@@ -9,7 +9,7 @@ function HomePage({ currentUser, handleLogout, navigateToPage, showCashFlowPage,
       {/* Header */}
       <header className="home-header">
         <div className="home-logo">
-          <i className="fas fa-chart-line"></i>
+          <img src="/src/assets/logo.png" alt="FinanceFlow" className="logo-image"/>
           <span>FinanceFlow</span>
         </div>
         <div className="user-menu">
