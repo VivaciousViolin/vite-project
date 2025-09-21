@@ -92,7 +92,7 @@ function AuthPage({ showOverviewPage, showHomePage, showToast, showLoading, auth
       <div className="auth-container">
         <div className="auth-header">
           <div className="logo">
-            <img src="/src/assets/logo.png" alt="FinanceFlow" className="logo-image" />
+            <i className="fas fa-chart-line"></i>
             <span>FinanceFlow</span>
           </div>
           <button 
