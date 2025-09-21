@@ -614,8 +614,10 @@ body {
 }
 
 .dashboard-card {
-    background: rgb(255, 255, 255);
+    background: rgb(255 255 255 / 82%);
     backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
     padding: 40px 30px;
     display: flex;
@@ -623,7 +625,6 @@ body {
     gap: 24px;
     cursor: pointer;
     transition: all 0.3s ease;
-    border: 2px solid transparent;
     text-align: left;
 }
 
@@ -854,14 +855,14 @@ body {
 }
 
 /* Special styling for dashboard card */
-.dashboard-card {
+/* .dashboard-card {
     background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
     border: 2px solid rgba(102, 126, 234, 0.2);
 }
 
 .dashboard-card:hover {
     background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.15));
-}
+} */
 
 /* Enhanced header for logged in state */
 .welcome-text {
