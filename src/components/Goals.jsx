@@ -78,7 +78,7 @@ const Goals = () => {
     <div className={styles['page-goals']}> 
       <header className={styles['home-header']}>
         <div className={styles['home-logo']}>
-          <i className="fas fa-chart-line"></i>
+        <img src="/src/assets/logo.png" alt="FinanceFlow" className="logo-image" />
           <span>FinanceFlow</span>
         </div>
         {/* Updated nav buttons to be in the middle */}
