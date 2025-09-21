@@ -6,7 +6,6 @@ import Toast from './components/Toast.jsx'
 import LoadingSpinner from './components/LoadingSpinner.jsx'
 import { checkAuthState, getCurrentUser, initializeDemoData } from './utils/auth.jsx'
 
-
 function App() {
   const [currentPage, setCurrentPage] = useState('overview')
   const [currentUser, setCurrentUser] = useState(null)
@@ -15,18 +14,29 @@ function App() {
   const [toasts, setToasts] = useState([])
 
   // Initialize app on mount
-  useEffect(() => {
-    initializeDemoData()
+  // useEffect(() => {
+  //   initializeDemoData()
     
     // Always start with overview page as home page
-    setCurrentPage('overview')
+    // setCurrentPage('overview')
     
     // Check if user is logged in for later use
-    const authState = checkAuthState()
-    if (authState.isAuthenticated) {
-      setCurrentUser(authState.user)
-    }
-  }, [])
+    // const authState = checkAuthState()
+    // if (authState.isAuthenticated) {
+    //   setCurrentUser(authState.user)
+    // }
+    useEffect(() => {
+      initializeDemoData()
+      
+      // Check authentication state first
+      const authState = checkAuthState()
+      if (authState.isAuthenticated) {
+        setCurrentUser(authState.user)
+        setCurrentPage('home')  // Go to home if logged in
+      } else {
+        setCurrentPage('overview')  // Go to overview if not logged in
+      }
+    }, [])
 
   // Navigation functions
   const showOverviewPage = () => {
@@ -99,7 +109,6 @@ function App() {
   }
 
   return (
-
     <div className="app">
       {currentPage === 'overview' && <OverviewPage {...appProps} />}
       {currentPage === 'auth' && <AuthPage {...appProps} />}
@@ -108,8 +117,8 @@ function App() {
       <Toast toasts={toasts} removeToast={removeToast} />
       <LoadingSpinner isLoading={isLoading} />
     </div>
-
   )
 }
 
 export default App
+
