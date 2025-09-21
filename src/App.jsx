@@ -5,128 +5,123 @@ import HomePage from './components/HomePage.jsx'
 import Toast from './components/Toast.jsx'
 import LoadingSpinner from './components/LoadingSpinner.jsx'
 import CashFlow from './components/CashFlow.jsx' //BINGCHILLING
+import Goals from './components/Goals.jsx'
 import { checkAuthState, getCurrentUser, initializeDemoData } from './utils/auth.jsx'
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('overview')
-  const [currentUser, setCurrentUser] = useState(null)
-  const [authTab, setAuthTab] = useState('login')
-  const [isLoading, setIsLoading] = useState(false)
-  const [toasts, setToasts] = useState([])
+  const [currentPage, setCurrentPage] = useState('overview')
+  const [currentUser, setCurrentUser] = useState(null)
+  const [authTab, setAuthTab] = useState('login')
+  const [isLoading, setIsLoading] = useState(false)
+  const [toasts, setToasts] = useState([])
 
-  // Initialize app on mount
-  // useEffect(() => {
-  //   initializeDemoData()
-    
-    // Always start with overview page as home page
-    // setCurrentPage('overview')
-    
-    // Check if user is logged in for later use
-    // const authState = checkAuthState()
-    // if (authState.isAuthenticated) {
-    //   setCurrentUser(authState.user)
-    // }
-    useEffect(() => {
-      initializeDemoData()
-      
-      // Check authentication state first
-      const authState = checkAuthState()
-      if (authState.isAuthenticated) {
-        setCurrentUser(authState.user)
-        setCurrentPage('home')  // Go to home if logged in
-      } else {
-        setCurrentPage('overview')  // Go to overview if not logged in
-      }
-    }, [])
+  // Initialize app on mount
+    useEffect(() => {
+      initializeDemoData()
+      
+      // Check authentication state first
+      const authState = checkAuthState()
+      if (authState.isAuthenticated) {
+        setCurrentUser(authState.user)
+        setCurrentPage('home')  // Go to home if logged in
+      } else {
+        setCurrentPage('overview')  // Go to overview if not logged in
+      }
+    }, [])
 
-  // Navigation functions
-  const showOverviewPage = () => {
-    console.log('🏠 Showing overview page')
-    setCurrentPage('overview')
-  }
+  // Navigation functions
+  const showOverviewPage = () => {
+    console.log('🏠 Showing overview page')
+    setCurrentPage('overview')
+  }
 
-  const showAuthPage = (tab = 'login') => {
-    console.log('🔐 Showing auth page with tab:', tab)
-    setCurrentPage('auth')
-    setAuthTab(tab)
-  }
+  const showAuthPage = (tab = 'login') => {
+    console.log('🔐 Showing auth page with tab:', tab)
+    setCurrentPage('auth')
+    setAuthTab(tab)
+  }
 
-  const showCashFlowPage = () => {
-    console.log('cashflow, get your money up not your funny up')
-    setCurrentPage('cashflow')
-  }
+  const showCashFlowPage = () => {
+    console.log('cashflow, get your money up not your funny up')
+    setCurrentPage('cashflow')
+  }
 
-  const showHomePage = () => {
-    console.log('🏡 Showing home page')
-    setCurrentUser(getCurrentUser())
-    setCurrentPage('home')
-  }
+  const showHomePage = () => {
+    console.log('🏡 Showing home page')
+    setCurrentUser(getCurrentUser())
+    setCurrentPage('home')
+  }
 
-  // Toast functions
-  const showToast = (message, type = 'info') => {
-    const id = Date.now()
-    const newToast = { id, message, type }
-    
-    setToasts(prev => [...prev, newToast])
-    
-    // Auto remove after 5 seconds
-    setTimeout(() => {
-      removeToast(id)
-    }, 5000)
-  }
+  const showGoalsPage = () => {
+    console.log('ok')
+    setCurrentPage('goals')
+  }
 
-  const removeToast = (id) => {
-    setToasts(prev => prev.filter(toast => toast.id !== id))
-  }
+  // Toast functions
+  const showToast = (message, type = 'info') => {
+    const id = Date.now()
+    const newToast = { id, message, type }
+    
+    setToasts(prev => [...prev, newToast])
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+      removeToast(id)
+    }, 5000)
+  }
 
-  // Loading function
-  const showLoading = (show) => {
-    setIsLoading(show)
-  }
+  const removeToast = (id) => {
+    setToasts(prev => prev.filter(toast => toast.id !== id))
+  }
 
-  // Logout function
-  const handleLogout = () => {
-    localStorage.removeItem('financeflow_current_user')
-    setCurrentUser(null)
-    showToast('See you later!', 'success')
-    setTimeout(() => showOverviewPage(), 200)
-  }
+  // Loading function
+  const showLoading = (show) => {
+    setIsLoading(show)
+  }
 
-  // Navigation to placeholder pages
-  const navigateToPage = (page) => {
-    showToast(`Navigating to ${page} page...`, 'info')
-    console.log(`Navigate to ${page} page`)
-  }
+  // Logout function
+  const handleLogout = () => {
+    localStorage.removeItem('financeflow_current_user')
+    setCurrentUser(null)
+    showToast('See you later!', 'success')
+    setTimeout(() => showOverviewPage(), 200)
+  }
 
-  // Props to pass to components
-  const appProps = {
-    showOverviewPage,
-    showAuthPage,
-    showHomePage,
-    showToast,
-    showLoading,
-    handleLogout,
-    navigateToPage,
-    currentUser,
-    showCashFlowPage, //BINGCHILLING
-    authTab,
-    setAuthTab,
-    // Add these new navigation functions
-    isLoggedIn: !!currentUser
-  }
+  // Navigation to placeholder pages
+  const navigateToPage = (page) => {
+    showToast(`Navigating to ${page} page...`, 'info')
+    console.log(`Maps to ${page} page`)
+  }
 
-  return (
-    <div className="app">
-      {currentPage === 'overview' && <OverviewPage {...appProps} />}
-      {currentPage === 'auth' && <AuthPage {...appProps} />}
-      {currentPage === 'home' && <HomePage {...appProps} />}
-      {currentPage === 'cashflow' && <CashFlow {...appProps} />}
-      
-      <Toast toasts={toasts} removeToast={removeToast} />
-      <LoadingSpinner isLoading={isLoading} />
-    </div>
-  )
+  // Props to pass to components
+  const appProps = {
+    showOverviewPage,
+    showAuthPage,
+    showHomePage,
+    showToast,
+    showGoalsPage,
+    showLoading,
+    handleLogout,
+    navigateToPage,
+    currentUser,
+    showCashFlowPage, //BINGCHILLING
+    authTab,
+    setAuthTab,
+    // Add these new navigation functions
+    isLoggedIn: !!currentUser
+  }
+
+  return (
+    <div className="app">
+      {currentPage === 'overview' && <OverviewPage {...appProps} />}
+      {currentPage === 'auth' && <AuthPage {...appProps} />}
+      {currentPage === 'home' && <HomePage {...appProps} />}
+      {currentPage === 'cashflow' && <CashFlow {...appProps} />}
+      {currentPage === 'goals' && <Goals {...appProps} />}
+      <Toast toasts={toasts} removeToast={removeToast} />
+      <LoadingSpinner isLoading={isLoading} />
+    </div>
+  )
 }
 
 export default App
-
