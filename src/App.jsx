@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react'
 import OverviewPage from './components/OverviewPage.jsx'
 import AuthPage from './components/AuthPage.jsx'
@@ -6,20 +5,7 @@ import HomePage from './components/HomePage.jsx'
 import Toast from './components/Toast.jsx'
 import LoadingSpinner from './components/LoadingSpinner.jsx'
 import { checkAuthState, getCurrentUser, initializeDemoData } from './utils/auth.jsx'
-=======
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Routes, Route } from 'react-router-dom'
-import Test from './components/Test'
-import CashFlow from './components/CashFlow'
-import Budgeting from './components/Budgeting'
-import Login from './components/Login'
-import Home from './components/Home'
-import Overview1 from './components/Overview1'
-import Goals from './components/Goals'
->>>>>>> 9b813e170982a4544df22c8f0ba05728ab0c8117
+
 
 function App() {
   const [currentPage, setCurrentPage] = useState('overview')
@@ -113,7 +99,7 @@ function App() {
   }
 
   return (
-<<<<<<< HEAD
+
     <div className="app">
       {currentPage === 'overview' && <OverviewPage {...appProps} />}
       {currentPage === 'auth' && <AuthPage {...appProps} />}
@@ -122,18 +108,7 @@ function App() {
       <Toast toasts={toasts} removeToast={removeToast} />
       <LoadingSpinner isLoading={isLoading} />
     </div>
-=======
-    <Routes>
-        <Route path="/test" element={<Test/>} />
-        <Route path="/" element={<Home/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/overview" element={<Overview1/>} />
-        <Route path="/cash-flow" element={<CashFlow/>} />
-        <Route path="/budgeting" element={<Budgeting/>} />
-        <Route path="/goals" element={<Goals/>} />
-        
-    </Routes>
->>>>>>> 9b813e170982a4544df22c8f0ba05728ab0c8117
+
   )
 }
 
