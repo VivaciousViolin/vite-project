@@ -32,8 +32,7 @@ function HomePage({ currentUser, handleLogout, navigateToPage, showCashFlowPage,
           <div className="dashboard-grid">
             <div 
               className="dashboard-card" 
-              //onClick={() => navigateToPage('cashflow')}
-              onClick={showCashFlowPage}
+              onClick={() => navigateToPage('cashflow')}
             >
               <div className="card-icon">
                 <i className="fas fa-chart-area"></i>
@@ -75,7 +74,7 @@ function HomePage({ currentUser, handleLogout, navigateToPage, showCashFlowPage,
 
             <div 
               className="dashboard-card"
-              onClick={showGoalsPage}
+              onClick={() => navigateToPage('goals')}
             >
               <div className="card-icon">
                 <i className="fas fa-bullseye"></i>
