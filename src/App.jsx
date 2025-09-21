@@ -4,6 +4,7 @@ import AuthPage from './components/AuthPage.jsx'
 import HomePage from './components/HomePage.jsx'
 import Toast from './components/Toast.jsx'
 import LoadingSpinner from './components/LoadingSpinner.jsx'
+import CashFlow from './components/CashFlow.jsx' //BINGCHILLING
 import { checkAuthState, getCurrentUser, initializeDemoData } from './utils/auth.jsx'
 
 function App() {
@@ -48,6 +49,11 @@ function App() {
     console.log('🔐 Showing auth page with tab:', tab)
     setCurrentPage('auth')
     setAuthTab(tab)
+  }
+
+  const showCashFlowPage = () => {
+    console.log('cashflow, get your money up not your funny up')
+    setCurrentPage('cashflow')
   }
 
   const showHomePage = () => {
@@ -102,6 +108,7 @@ function App() {
     handleLogout,
     navigateToPage,
     currentUser,
+    showCashFlowPage, //BINGCHILLING
     authTab,
     setAuthTab,
     // Add these new navigation functions
@@ -113,6 +120,7 @@ function App() {
       {currentPage === 'overview' && <OverviewPage {...appProps} />}
       {currentPage === 'auth' && <AuthPage {...appProps} />}
       {currentPage === 'home' && <HomePage {...appProps} />}
+      {currentPage === 'cashflow' && <CashFlow {...appProps} />}
       
       <Toast toasts={toasts} removeToast={removeToast} />
       <LoadingSpinner isLoading={isLoading} />

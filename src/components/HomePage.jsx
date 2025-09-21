@@ -1,6 +1,6 @@
 import React from 'react'
 
-function HomePage({ currentUser, handleLogout, navigateToPage }) {
+function HomePage({ currentUser, handleLogout, navigateToPage, showCashFlowPage }) {
   const username = currentUser ? currentUser.username : 'User'
   
   return (
@@ -31,7 +31,8 @@ function HomePage({ currentUser, handleLogout, navigateToPage }) {
           <div className="dashboard-grid">
             <div 
               className="dashboard-card" 
-              onClick={() => navigateToPage('cash-flow')}
+              //onClick={() => navigateToPage('cashflow')}
+              onClick={showCashFlowPage}
             >
               <div className="card-icon">
                 <i className="fas fa-chart-area"></i>
