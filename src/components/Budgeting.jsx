@@ -5,7 +5,7 @@ const Budgeting = () => {
     <div>
       <h1>Budgeting Page</h1>
       <p>This is the Budgeting page.</p>
-      <p>I love cool ponies</p>
+      <p></p>
     </div>
   );
 };
