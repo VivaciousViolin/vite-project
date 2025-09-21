@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import styles from './Goals.module.css';
 
-const Goals = () => {
+const Goals = ({ handleLogout, navigateToPage }) => {
   const [goalAmount, setGoalAmount] = useState('');
   const [goalTime, setGoalTime] = useState('');
   const [timeUnit, setTimeUnit] = useState('years');
@@ -77,24 +77,36 @@ const Goals = () => {
   return (
     <div className={styles['page-goals']}> 
       <header className={styles['home-header']}>
-        <div className={styles['home-logo']}>
-          <i className="fas fa-chart-line"></i>
-          <span>FinanceFlow</span>
-        </div>
-        {/* Updated nav buttons to be in the middle */}
-        <div className={styles['nav-buttons']}>
-          <button className={`${styles.btn} ${styles['btn-outline']} ${styles['btn-small']}`}>
-            Cash Flow
-          </button>
-          <button className={`${styles.btn} ${styles['btn-outline']} ${styles['btn-small']}`}>
-            Budgeting
-          </button>
+        <div className={styles['header-left']}>
+          <div className={styles['home-logo']}>
+            <img src="/src/assets/logo.png" alt="FinanceFlow" className="logo-image" />
+            <span>FinanceFlow</span>
+          </div>
+          <div className={styles['nav-buttons']}>
+            <button 
+              className={`${styles.btn} ${styles['btn-outline']} ${styles['btn-small']}`}
+              onClick={() => navigateToPage('home')}
+            >
+              Dashboard
+            </button>
+            <button 
+              className={`${styles.btn} ${styles['btn-outline']} ${styles['btn-small']}`}
+              onClick={() => navigateToPage('cash-flow')}
+            >
+              Cash Flow
+            </button>
+            <button 
+              className={`${styles.btn} ${styles['btn-outline']} ${styles['btn-small']}`}
+              onClick={() => navigateToPage('budgeting')}
+            >
+              Budgeting
+            </button>
+          </div>
         </div>
         <div className={styles['user-menu']}>
-          <span className={styles['welcome-text']}>Welcome back, demo!</span>
           <button 
             className={`${styles.btn} ${styles['btn-outline']} ${styles['btn-small']}`}
-            onClick={() => console.log('Logout clicked')}
+            onClick={handleLogout}
           >
             Logout
           </button>

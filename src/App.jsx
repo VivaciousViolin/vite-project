@@ -16,18 +16,23 @@ function App() {
   const [toasts, setToasts] = useState([])
 
   // Initialize app on mount
-    useEffect(() => {
-      initializeDemoData()
-      
-      // Check authentication state first
-      const authState = checkAuthState()
-      if (authState.isAuthenticated) {
-        setCurrentUser(authState.user)
-        setCurrentPage('home')  // Go to home if logged in
-      } else {
-        setCurrentPage('overview')  // Go to overview if not logged in
-      }
-    }, [])
+useEffect(() => {
+    initializeDemoData()
+    
+    // Check for saved page state first
+    const savedPage = localStorage.getItem('financeflow_current_page')
+    
+    // Check authentication state
+    const authState = checkAuthState()
+    if (authState.isAuthenticated) {
+      setCurrentUser(authState.user)
+      // If user is logged in, use saved page or default to home
+      setCurrentPage(savedPage || 'home')
+    } else {
+      // If not logged in, always go to overview
+      setCurrentPage('overview')
+    }
+  }, [])
 
   // Navigation functions
   const showOverviewPage = () => {
@@ -47,10 +52,11 @@ function App() {
   }
 
   const showHomePage = () => {
-    console.log('🏡 Showing home page')
-    setCurrentUser(getCurrentUser())
-    setCurrentPage('home')
-  }
+    console.log('🏡 Showing home page')
+    setCurrentUser(getCurrentUser())
+    setCurrentPage('home')
+    localStorage.setItem('financeflow_current_page', 'home')
+  }
 
   const showGoalsPage = () => {
     console.log('ok')
@@ -81,17 +87,27 @@ function App() {
 
   // Logout function
   const handleLogout = () => {
-    localStorage.removeItem('financeflow_current_user')
-    setCurrentUser(null)
-    showToast('See you later!', 'success')
-    setTimeout(() => showOverviewPage(), 200)
-  }
+    localStorage.removeItem('financeflow_current_user')
+    localStorage.removeItem('financeflow_current_page') // Clear saved page
+    setCurrentUser(null)
+    showToast('See you later!', 'success')
+    setTimeout(() => showOverviewPage(), 200)
+  }
 
   // Navigation to placeholder pages
   const navigateToPage = (page) => {
-    showToast(`Navigating to ${page} page...`, 'info')
-    console.log(`Maps to ${page} page`)
-  }
+    if (page === 'home') {
+      showHomePage()
+    } else if (page === 'goals') {
+      setCurrentPage('goals')
+      localStorage.setItem('financeflow_current_page', 'goals')
+    } else {
+      showToast(`Navigating to ${page} page...`, 'info')
+      console.log(`Navigate to ${page} page`)
+      // For future pages, save their state too
+      localStorage.setItem('financeflow_current_page', page)
+    }
+  }
 
   // Props to pass to components
   const appProps = {
@@ -112,16 +128,16 @@ function App() {
   }
 
   return (
-    <div className="app">
-      {currentPage === 'overview' && <OverviewPage {...appProps} />}
-      {currentPage === 'auth' && <AuthPage {...appProps} />}
-      {currentPage === 'home' && <HomePage {...appProps} />}
-      {currentPage === 'cashflow' && <CashFlow {...appProps} />}
-      {currentPage === 'goals' && <Goals {...appProps} />}
-      <Toast toasts={toasts} removeToast={removeToast} />
-      <LoadingSpinner isLoading={isLoading} />
-    </div>
-  )
+    <div className="app">
+      {currentPage === 'overview' && <OverviewPage {...appProps} />}
+      {currentPage === 'auth' && <AuthPage {...appProps} />}
+      {currentPage === 'home' && <HomePage {...appProps} />}
+      {currentPage === 'goals' && <Goals {...appProps} />}
+      
+      <Toast toasts={toasts} removeToast={removeToast} />
+      <LoadingSpinner isLoading={isLoading} />
+    </div>
+  )
 }
 
 export default App
