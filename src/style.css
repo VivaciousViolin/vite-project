@@ -12,6 +12,22 @@ body {
     min-height: 100vh;
 }
 
+/* Logo image styling */
+.logo-image {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+    /* filter: brightness(0) invert(1); Makes the logo white */
+}
+
+/* Alternative if you want to keep original colors */
+/* .logo-image.original-colors {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    /* Remove filter to keep original logo colors 
+}*/
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
