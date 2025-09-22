@@ -3,34 +3,10 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 import styles from './Budgeting.module.css';
 
-// Đăng ký các thành phần cần thiết của Chart.js
+// Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-// Component để nhập ngân sách hàng tháng
-const MonthlyBudgetInput = ({ monthlyBudget, setMonthlyBudget }) => {
-  const handleInputChange = (event) => {
-    setMonthlyBudget(event.target.value);
-  };
-
-  return (
-    <div className={styles.budgetInputCard}>
-      <label htmlFor="monthly-budget">Nhập ngân sách hàng tháng:</label>
-      <input
-        id="monthly-budget"
-        type="number"
-        value={monthlyBudget}
-        onChange={handleInputChange}
-        className={styles.inputBox}
-        placeholder="e.g., $2,500"
-      />
-      {monthlyBudget && (
-        <p>Ngân sách của bạn: **{monthlyBudget} USD**</p>
-      )}
-    </div>
-  );
-};
-
-// Component chính của trang
+// Main page component
 function Budgeting({ currentUser, handleLogout, navigateToPage }) {
   const [activeFilter, setActiveFilter] = useState('1M');
   const [monthlyBudget, setMonthlyBudget] = useState('');
@@ -55,7 +31,7 @@ function Budgeting({ currentUser, handleLogout, navigateToPage }) {
 
   const timeFilters = ['1D', '1W', '1M', '6M', '1Y', 'MAX'];
   
-  // Dữ liệu cho biểu đồ tròn
+  // Data for the pie chart
   const chartData = {
     labels: expenses.map(item => item.category),
     datasets: [
@@ -83,7 +59,7 @@ function Budgeting({ currentUser, handleLogout, navigateToPage }) {
 
   return (
     <div className={styles.pageBudgeting}>
-      {/* HEADER ĐƯỢC TÍCH HỢP TRỰC TIẾP */}
+      {/* HEADER INTEGRATED DIRECTLY */}
       <header className={styles.homeHeader}>
         <div className={styles.headerLeft}>
           <div className={styles.homeLogo}>
@@ -93,7 +69,7 @@ function Budgeting({ currentUser, handleLogout, navigateToPage }) {
           <div className={styles.navButtons}>
             <button 
               className={`${styles.btn} ${styles.btnOutline} ${styles.btnSmall}`}
-              onClick={() => navigateToPage('home')}
+              onClick={() => navigateToPage('dashboard')}
             >
               Dashboard
             </button>
@@ -121,13 +97,13 @@ function Budgeting({ currentUser, handleLogout, navigateToPage }) {
         </div>
       </header>
 
-      {/* Nội dung chính của trang Budgeting */}
+      {/* Main content */}
       <div className={styles.contentContainer}>
         <div className={styles.container}>
           <h1 className={styles.title}>Budgeting Dashboard</h1>
 
           <div className={styles.budgetGrid}>
-            {/* Thẻ bên trái: Input */}
+            {/* Left Card: Inputs */}
             <div className={styles.inputCard}>
               <div className={styles.monthlyBudgetSection}>
                 <label className={styles.label}>My Monthly Budget is:</label>
@@ -144,7 +120,7 @@ function Budgeting({ currentUser, handleLogout, navigateToPage }) {
                 <label className={styles.label}>Spending Per Category:</label>
                 {expenses.map((item, index) => (
                   <div key={index} className={styles.expenseInputItem}>
-                    <label htmlFor={item.category}>{item.category}</label>
+                    <label htmlFor={item.category} className={styles.expenseLabel}>{item.category}</label>
                     <input
                       className={styles.expenseInput}
                       id={item.category}
@@ -158,16 +134,27 @@ function Budgeting({ currentUser, handleLogout, navigateToPage }) {
               </div>
             </div>
 
-            {/* Thẻ bên phải: Biểu đồ tròn */}
+            {/* Right Card: Pie Chart */}
             <div className={styles.pieChartCard}>
               <div className={styles.chartWrapper}>
                 <Pie 
-                   data={chartData} 
+                  data={chartData} 
                   options={{
-                     responsive: true,
-                      maintainAspectRatio: true,
-               }} 
-  />
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                      legend: {
+                        position: 'top',
+                      },
+                      tooltip: {
+                        enabled: true,
+                      },
+                      labels: {
+                        render: 'label',
+                      }
+                    }
+                  }} 
+                />
               </div>
             </div>
           </div>

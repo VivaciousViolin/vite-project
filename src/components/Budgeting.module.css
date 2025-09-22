@@ -1,6 +1,6 @@
 /* ====================================
-   Global & Base Styles
-   ==================================== */
+    Global & Base Styles
+    ==================================== */
 .pageBudgeting {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
@@ -13,27 +13,27 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-     background: rgba(255, 255, 255, 0.15); 
-  border-radius: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .title {
-  font-size: 3.5rem;
-  font-weight: 800;
-  margin-bottom: 30px;
-  text-align: center;
-  letter-spacing: 2px;
-  color: white;
-  text-shadow: 
-    -2px -2px 0 #4a4a4a,
-    -4px -4px 0 #333,
-    0 0 10px rgba(255, 255, 255, 0.2);
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 30px;
+    text-align: center;
+    letter-spacing: 2px;
+    color: white;
+    text-shadow:
+        -2px -2px 0 #4a4a4a,
+        -4px -4px 0 #333,
+        0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 /* ====================================
-   Headers & Navigation
-   ==================================== */
+    Headers & Navigation
+    ==================================== */
 .homeHeader {
     display: flex;
     justify-content: space-between;
@@ -83,8 +83,8 @@
 }
 
 /* ====================================
-   Buttons
-   ==================================== */
+    Buttons
+    ==================================== */
 .btn {
     padding: 10px 16px;
     border: none;
@@ -118,15 +118,15 @@
 }
 
 /* ====================================
-   Budgeting Page Specific Styles
-   ==================================== */
+    Budgeting Page Specific Styles
+    ==================================== */
 .contentContainer {
     padding: 4rem 0;
 }
 
 .budgetGrid {
     display: grid;
-     grid-template-columns: 1fr 2fr; /* bên trái nhỏ, bên phải to */
+    grid-template-columns: 1fr 2fr;
     gap: 2rem;
     align-items: stretch;
 }
@@ -158,11 +158,17 @@
     border-radius: 8px;
     font-size: 16px;
     transition: border-color 0.3s ease;
+    background: rgba(118, 75, 162, 0.15); /* New background color */
+    color: #333; /* Dark text for readability */
 }
 
 .inputBox:focus {
     outline: none;
     border-color: #667eea;
+}
+
+.inputBox::placeholder {
+    color: #333;
 }
 
 .expenseInputsList {
@@ -181,6 +187,15 @@
     margin-right: 15px;
 }
 
+.expenseLabel {
+  background: rgba(102, 126, 234, 0.1);
+  color: #333;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
 .expenseInput {
     width: 100px;
     padding: 8px;
@@ -188,39 +203,43 @@
     border-radius: 5px;
     text-align: right;
     font-size: 14px;
+    background: rgba(118, 75, 162, 0.15);
+    color: #333;
+}
+
+.expenseInput:focus {
+    outline: none;
+    border-color: #667eea;
 }
 
 /* ====================================
-   Pie Chart Styles
-   ==================================== */
+    Pie Chart Styles
+    ==================================== */
 .pieChartCard {
-    background: white;
-  padding: 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .chartWrapper {
-    width: 300px;     /* cố định kích thước chiều ngang */
-  height: 300px;    /* chiều cao bằng chiều ngang => hình vuông */
-  margin: 0 auto;
-  margin-bottom: 10px;
+    width: 450px;
+    height: 450px;
+    position: relative;
 }
 
+/* Fix for Chart.js canvas to respect parent dimensions */
 .chartWrapper canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100% !important;
-    height: 100% !important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 /* ====================================
-   Summary Section
-   ==================================== */
+    Summary Section
+    ==================================== */
 .summarySection {
     margin-top: 2rem;
     padding: 2rem;
@@ -242,8 +261,8 @@
 }
 
 /* ====================================
-   Responsive Design
-   ==================================== */
+    Responsive Design
+    ==================================== */
 @media (max-width: 992px) {
     .budgetGrid {
         grid-template-columns: 1fr;
@@ -267,5 +286,3 @@
         justify-content: center;
     }
 }
-
-
