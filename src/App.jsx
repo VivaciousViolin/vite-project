@@ -47,10 +47,6 @@ useEffect(() => {
     setAuthTab(tab)
   }
 
-  const showCashFlowPage = () => {
-    console.log('cashflow, get your money up not your funny up')
-    setCurrentPage('cashflow')
-  }
 
   const showBudgetingPage = () => {
     console.log('cashflow')
@@ -67,6 +63,10 @@ useEffect(() => {
   const showGoalsPage = () => {
     console.log('ok')
     setCurrentPage('goals')
+  }
+  const showCashFlowPage = () => {
+    console.log('ok')
+    setCurrentPage('cashflow')
   }
 
   // Toast functions
@@ -141,6 +141,7 @@ useEffect(() => {
       {currentPage === 'auth' && <AuthPage {...appProps} />}
       {currentPage === 'home' && <HomePage {...appProps} />}
       {currentPage === 'goals' && <Goals {...appProps} />}
+      {currentPage === 'cashflow' && <CashFlow {...appProps} />}
       {currentPage === 'budgeting' && <Budgeting {...appProps} />}
       
       <Toast toasts={toasts} removeToast={removeToast} />
