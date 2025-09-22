@@ -32,8 +32,8 @@ function HomePage({ currentUser, handleLogout, navigateToPage, showCashFlowPage,
           <div className="dashboard-grid">
             <div 
               className="dashboard-card" 
-              //onClick={() => navigateToPage('cashflow')}
-              onClick={showCashFlowPage}
+              onClick={() => navigateToPage('cash-flow')}
+            //   onClick={showCashFlowPage}
             >
               <div className="card-icon">
                 <i className="fas fa-chart-area"></i>

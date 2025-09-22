@@ -149,7 +149,7 @@ useEffect(() => {
       {currentPage === 'auth' && <AuthPage {...appProps} />}
       {currentPage === 'home' && <HomePage {...appProps} />}
       {currentPage === 'goals' && <Goals {...appProps} />}
-      {currentPage === 'cashflow' && <CashFlow {...appProps} />}
+      {currentPage === 'cash-flow' && <CashFlow {...appProps} />}
       {currentPage === 'budgeting' && <Budgeting {...appProps} />}
       
       <Toast toasts={toasts} removeToast={removeToast} />
