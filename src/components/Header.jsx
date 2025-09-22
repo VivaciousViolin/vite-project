@@ -5,7 +5,7 @@ function Header({ showAuthPage, showHomePage, isLoggedIn, currentUser }) {
     <header className="header">
       <div className="logo-section">
         <div className="logo">
-          <i className="fas fa-chart-line"></i>
+          <img src="/src/assets/logo.png" alt="FinanceFlow" className="logo-image" />
           <span>FinanceFlow</span>
         </div>
       </div>
