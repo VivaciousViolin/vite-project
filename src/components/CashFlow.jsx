@@ -12,7 +12,7 @@ import {
 
 const STORAGE_KEY = "cashflow_transactions";
 
-export default function CashFlow() {
+export default function CashFlow({ handleLogout, navigateToPage }) {
   const [transactions, setTransactions] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     return saved ? JSON.parse(saved) : [];
@@ -50,18 +50,6 @@ export default function CashFlow() {
     value: tx.type === "Income" ? tx.price : -tx.price
   }));
 
-  const navigateToPage = (page) => {
-    switch(page){
-      case "home": window.location.href="/"; break;
-      case "cash-flow": window.location.href="/cashflow"; break;
-      default: break;
-    }
-  };
-
-  const handleLogout = () => {
-    console.log("Logged out");
-  };
-
   return (
     <div className={styles.pageCashFlow}>
       {/* HEADER */}
@@ -71,16 +59,35 @@ export default function CashFlow() {
             <img src="/src/assets/logo.png" alt="FinanceFlow" className="logo-image" />
             <span>FinanceFlow</span>
           </div>
-        </div>
-
-        <div className={styles.navButtons}>
-          <button className={`${styles.btn} ${styles.btnOutline} ${styles.btnSmall}`} onClick={() => navigateToPage('home')}>Dashboard</button>
-          <button className={`${styles.btn} ${styles.btnOutline} ${styles.btnSmall}`} onClick={() => navigateToPage('budgeting')}>Budgeting</button>
-          <button className={`${styles.btn} ${styles.btnOutline} ${styles.btnSmall}`} onClick={() => navigateToPage('goals')}>Goals</button>
+          <div className={styles.navButtons}>
+            <button 
+              className={`${styles.btn} ${styles.btnOutline} ${styles.btnSmall}`} 
+              onClick={() => navigateToPage('home')}
+            >
+              Dashboard
+            </button>
+            <button 
+              className={`${styles.btn} ${styles.btnOutline} ${styles.btnSmall}`} 
+              onClick={() => navigateToPage('budgeting')}
+            >
+              Budgeting
+            </button>
+            <button 
+              className={`${styles.btn} ${styles.btnOutline} ${styles.btnSmall}`} 
+              onClick={() => navigateToPage('goals')}
+            >
+              Goals
+            </button>
+          </div>
         </div>
 
         <div className={styles.userMenu}>
-          <button className={`${styles.btn} ${styles.btnOutline} ${styles.btnSmall}`} onClick={handleLogout}>Logout</button>
+          <button 
+            className={`${styles.btn} ${styles.btnOutline} ${styles.btnSmall}`} 
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
         </div>
       </header>
 

@@ -69,7 +69,7 @@ function Budgeting({ currentUser, handleLogout, navigateToPage }) {
           <div className={styles.navButtons}>
             <button 
               className={`${styles.btn} ${styles.btnOutline} ${styles.btnSmall}`}
-              onClick={() => navigateToPage('dashboard')}
+              onClick={() => navigateToPage('home')}
             >
               Dashboard
             </button>
