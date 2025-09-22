@@ -1,0 +1,288 @@
+/* ====================================
+    Global & Base Styles
+    ==================================== */
+.pageBudgeting {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #000;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 30px;
+    text-align: center;
+    letter-spacing: 2px;
+    color: white;
+    text-shadow:
+        -2px -2px 0 #4a4a4a,
+        -4px -4px 0 #333,
+        0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* ====================================
+    Headers & Navigation
+    ==================================== */
+.homeHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.headerLeft {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.homeLogo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.homeLogo img {
+    height: 40px;
+    border-radius: 8px;
+}
+
+.navButtons {
+    display: flex;
+    gap: 10px;
+}
+
+.userMenu {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.welcomeText {
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* ====================================
+    Buttons
+    ==================================== */
+.btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.btnOutline {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.btnOutline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.btnSmall {
+    padding: 8px 16px;
+    font-size: 12px;
+}
+
+/* ====================================
+    Budgeting Page Specific Styles
+    ==================================== */
+.contentContainer {
+    padding: 4rem 0;
+}
+
+.budgetGrid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    align-items: stretch;
+}
+
+.inputCard, .pieChartCard {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.monthlyBudgetSection, .expenseInputsList {
+    margin-bottom: 2rem;
+}
+
+.label {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.inputBox {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    background: rgba(118, 75, 162, 0.15); /* New background color */
+    color: #333; /* Dark text for readability */
+}
+
+.inputBox:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.inputBox::placeholder {
+    color: #333;
+}
+
+.expenseInputsList {
+    display: grid;
+    gap: 15px;
+}
+
+.expenseInputItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.expenseInputItem label {
+    flex-grow: 1;
+    margin-right: 15px;
+}
+
+.expenseLabel {
+  background: rgba(102, 126, 234, 0.1);
+  color: #333;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.expenseInput {
+    width: 100px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: right;
+    font-size: 14px;
+    background: rgba(118, 75, 162, 0.15);
+    color: #333;
+}
+
+.expenseInput:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+/* ====================================
+    Pie Chart Styles
+    ==================================== */
+.pieChartCard {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chartWrapper {
+    width: 450px;
+    height: 450px;
+    position: relative;
+}
+
+/* Fix for Chart.js canvas to respect parent dimensions */
+.chartWrapper canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ====================================
+    Summary Section
+    ==================================== */
+.summarySection {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.summaryText {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.highlight {
+    font-weight: 700;
+    color: #667eea;
+}
+
+/* ====================================
+    Responsive Design
+    ==================================== */
+@media (max-width: 992px) {
+    .budgetGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .homeHeader {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .headerLeft {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .navButtons {
+        justify-content: center;
+    }
+    .userMenu {
+        width: 100%;
+        justify-content: center;
+    }
+}
