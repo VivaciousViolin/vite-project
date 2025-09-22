@@ -18,22 +18,24 @@ function App() {
 
   // Initialize app on mount
 useEffect(() => {
-    initializeDemoData()
-    
-    // Check for saved page state first
-    const savedPage = localStorage.getItem('financeflow_current_page')
-    
-    // Check authentication state
-    const authState = checkAuthState()
-    if (authState.isAuthenticated) {
-      setCurrentUser(authState.user)
-      // If user is logged in, use saved page or default to home
-      setCurrentPage(savedPage || 'home')
+  initializeDemoData()
+  
+  const savedPage = localStorage.getItem('financeflow_current_page')
+  console.log('Saved page on reload:', savedPage)
+  
+  const authState = checkAuthState()
+  if (authState.isAuthenticated) {
+    setCurrentUser(authState.user)
+    // Only restore valid pages
+    if (savedPage === 'goals' || savedPage === 'budgeting' || savedPage === 'home') {
+      setCurrentPage(savedPage)
     } else {
-      // If not logged in, always go to overview
-      setCurrentPage('overview')
+      setCurrentPage('home') // Default to home for invalid pages
     }
-  }, [])
+  } else {
+    setCurrentPage('overview')
+  }
+}, [])
 
   // Navigation functions
   const showOverviewPage = () => {
@@ -101,19 +103,25 @@ useEffect(() => {
   }
 
   // Navigation to placeholder pages
-  const navigateToPage = (page) => {
-    if (page === 'home') {
-      showHomePage()
-    } else if (page === 'goals') {
-      setCurrentPage('goals')
-      localStorage.setItem('financeflow_current_page', 'goals')
-    } else {
-      showToast(`Navigating to ${page} page...`, 'info')
-      console.log(`Navigate to ${page} page`)
-      // For future pages, save their state too
-      localStorage.setItem('financeflow_current_page', page)
-    }
+ const navigateToPage = (page) => {
+  console.log('Navigating to page:', page)
+  
+  if (page === 'home') {
+    showHomePage()
+  } else if (page === 'goals') {
+    setCurrentPage('goals')
+    localStorage.setItem('financeflow_current_page', 'goals')
+  } else if (page === 'budgeting') {
+    setCurrentPage('budgeting')
+    localStorage.setItem('financeflow_current_page', 'budgeting')
+  } else if (page === 'cash-flow') {
+    setCurrentPage('cash-flow')
+    localStorage.setItem('financeflow_current_page', 'cash-flow')
+  } else {
+    showToast(`${page} page is not implemented yet`, 'info')
+    console.log(`Navigate to ${page} page`)
   }
+}
 
   // Props to pass to components
   const appProps = {
@@ -141,7 +149,7 @@ useEffect(() => {
       {currentPage === 'auth' && <AuthPage {...appProps} />}
       {currentPage === 'home' && <HomePage {...appProps} />}
       {currentPage === 'goals' && <Goals {...appProps} />}
-      {currentPage === 'cashflow' && <CashFlow {...appProps} />}
+      {currentPage === 'cash-flow' && <CashFlow {...appProps} />}
       {currentPage === 'budgeting' && <Budgeting {...appProps} />}
       
       <Toast toasts={toasts} removeToast={removeToast} />
