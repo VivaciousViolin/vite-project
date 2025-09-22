@@ -1,13 +1,189 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Pie } from 'react-chartjs-2';
+import styles from './Budgeting.module.css';
 
-const Budgeting = () => {
+// Đăng ký các thành phần cần thiết của Chart.js
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+// Component để nhập ngân sách hàng tháng
+const MonthlyBudgetInput = ({ monthlyBudget, setMonthlyBudget }) => {
+  const handleInputChange = (event) => {
+    setMonthlyBudget(event.target.value);
+  };
+
   return (
-    <div>
-      <h1>Budgeting Page</h1>
-      <p>This is the Budgeting page.</p>
-      <p>hfdskhfjks</p>
+    <div className={styles.budgetInputCard}>
+      <label htmlFor="monthly-budget">Nhập ngân sách hàng tháng:</label>
+      <input
+        id="monthly-budget"
+        type="number"
+        value={monthlyBudget}
+        onChange={handleInputChange}
+        className={styles.inputBox}
+        placeholder="e.g., $2,500"
+      />
+      {monthlyBudget && (
+        <p>Ngân sách của bạn: **{monthlyBudget} USD**</p>
+      )}
     </div>
   );
 };
+
+// Component chính của trang
+function Budgeting({ currentUser, handleLogout, navigateToPage }) {
+  const [activeFilter, setActiveFilter] = useState('1M');
+  const [monthlyBudget, setMonthlyBudget] = useState('');
+  
+  const [expenses, setExpenses] = useState([
+    { category: 'Food', amount: 52 },
+    { category: 'Clothing', amount: 22 },
+    { category: 'Transportation', amount: 55 },
+    { category: 'Entertainment', amount: 6 },
+    { category: 'Renting', amount: 4 },
+  ]);
+
+  const totalExpenses = useMemo(() => {
+    return expenses.reduce((sum, item) => sum + item.amount, 0);
+  }, [expenses]);
+  
+  const handleExpenseChange = (e, index) => {
+    const newExpenses = [...expenses];
+    newExpenses[index].amount = parseFloat(e.target.value) || 0;
+    setExpenses(newExpenses);
+  };
+
+  const timeFilters = ['1D', '1W', '1M', '6M', '1Y', 'MAX'];
+  
+  // Dữ liệu cho biểu đồ tròn
+  const chartData = {
+    labels: expenses.map(item => item.category),
+    datasets: [
+      {
+        label: 'Expenses by Category',
+        data: expenses.map(item => item.amount),
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.8)',
+          'rgba(54, 162, 235, 0.8)',
+          'rgba(255, 206, 86, 0.8)',
+          'rgba(75, 192, 192, 0.8)',
+          'rgba(153, 102, 255, 0.8)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  return (
+    <div className={styles.pageBudgeting}>
+      {/* HEADER ĐƯỢC TÍCH HỢP TRỰC TIẾP */}
+      <header className={styles.homeHeader}>
+        <div className={styles.headerLeft}>
+          <div className={styles.homeLogo}>
+            <img src="/src/assets/logo.png" alt="FinanceFlow" className={styles.logoImage} />
+            <span>FinanceFlow</span>
+          </div>
+          <div className={styles.navButtons}>
+            <button 
+              className={`${styles.btn} ${styles.btnOutline} ${styles.btnSmall}`}
+              onClick={() => navigateToPage('home')}
+            >
+              Dashboard
+            </button>
+            <button 
+              className={`${styles.btn} ${styles.btnOutline} ${styles.btnSmall}`}
+              onClick={() => navigateToPage('cash-flow')}
+            >
+              Cash Flow
+            </button>
+            <button 
+              className={`${styles.btn} ${styles.btnOutline} ${styles.btnSmall}`}
+              onClick={() => navigateToPage('goals')}
+            >
+              Goals
+            </button>
+          </div>
+        </div>
+        <div className={styles.userMenu}>
+          <button 
+            className={`${styles.btn} ${styles.btnOutline} ${styles.btnSmall}`}
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        </div>
+      </header>
+
+      {/* Nội dung chính của trang Budgeting */}
+      <div className={styles.contentContainer}>
+        <div className={styles.container}>
+          <h1 className={styles.title}>Budgeting Dashboard</h1>
+
+          <div className={styles.budgetGrid}>
+            {/* Thẻ bên trái: Input */}
+            <div className={styles.inputCard}>
+              <div className={styles.monthlyBudgetSection}>
+                <label className={styles.label}>My Monthly Budget is:</label>
+                <input
+                  type="number"
+                  value={monthlyBudget}
+                  onChange={(e) => setMonthlyBudget(e.target.value)}
+                  className={styles.inputBox}
+                  placeholder="e.g., $2,500"
+                />
+              </div>
+
+              <div className={styles.expenseInputsList}>
+                <label className={styles.label}>Spending Per Category:</label>
+                {expenses.map((item, index) => (
+                  <div key={index} className={styles.expenseInputItem}>
+                    <label htmlFor={item.category}>{item.category}</label>
+                    <input
+                      className={styles.expenseInput}
+                      id={item.category}
+                      type="number"
+                      value={item.amount !== 0 ? item.amount : ''}
+                      onChange={(e) => handleExpenseChange(e, index)}
+                      placeholder="0"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Thẻ bên phải: Biểu đồ tròn */}
+            <div className={styles.pieChartCard}>
+              <div className={styles.chartWrapper}>
+                <Pie 
+                   data={chartData} 
+                  options={{
+                     responsive: true,
+                      maintainAspectRatio: true,
+               }} 
+  />
+              </div>
+            </div>
+          </div>
+          
+          <div className={styles.summarySection}>
+            <p className={styles.summaryText}>
+              Total Expenses: <span className={styles.highlight}>${totalExpenses}</span>
+            </p>
+            <p className={styles.summaryText}>
+              Remaining Budget: <span className={styles.highlight}>${(monthlyBudget - totalExpenses).toFixed(2)}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default Budgeting;
