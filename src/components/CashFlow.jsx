@@ -75,7 +75,8 @@ export default function CashFlow() {
 
         <div className={styles.navButtons}>
           <button className={`${styles.btn} ${styles.btnOutline} ${styles.btnSmall}`} onClick={() => navigateToPage('home')}>Dashboard</button>
-          <button className={`${styles.btn} ${styles.btnOutline} ${styles.btnSmall}`} onClick={() => navigateToPage('cash-flow')}>Cash Flow</button>
+          <button className={`${styles.btn} ${styles.btnOutline} ${styles.btnSmall}`} onClick={() => navigateToPage('budgeting')}>Budgeting</button>
+          <button className={`${styles.btn} ${styles.btnOutline} ${styles.btnSmall}`} onClick={() => navigateToPage('goals')}>Goals</button>
         </div>
 
         <div className={styles.userMenu}>
