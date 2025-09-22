@@ -56,12 +56,13 @@
     align-items: center;
     gap: 12px;
     color: white;
-    font-size: 32px;
+    font-size: 24px;
     font-weight: bold;
 }
 
 .homeLogo img {
-    height: 40px;
+    height: 35px;
+    width:35px;
     border-radius: 8px;
 }
 
